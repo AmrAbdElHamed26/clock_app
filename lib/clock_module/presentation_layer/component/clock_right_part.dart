@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:date_time_format/date_time_format.dart';
@@ -7,9 +8,22 @@ import 'package:flutter/material.dart';
 import 'clock_animations.dart';
 
 
-class ClockRightPart extends StatelessWidget {
+class ClockRightPart extends StatefulWidget {
   const ClockRightPart({Key? key}) : super(key: key);
 
+  @override
+  State<ClockRightPart> createState() => _ClockRightPartState();
+}
+
+class _ClockRightPartState extends State<ClockRightPart> {
+
+  @override
+  void initState() {
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      setState(() {});
+    });
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     var now = DateTime.now();
