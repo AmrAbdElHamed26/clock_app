@@ -22,8 +22,11 @@ class ClockView extends StatelessWidget {
         ),
         BlocBuilder<ClockBloc , ClockState>(
           builder: (context , state) {
-           if(state is CurrentPageChangedState)return screens[state.pageNumber];
-           else return screens[0];
+           if(state is CurrentPageChangedState) {
+             return screens[state.pageNumber];
+           } else {
+             return screens[0];
+           }
           }
         ),
       ],

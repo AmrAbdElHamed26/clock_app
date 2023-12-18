@@ -16,13 +16,23 @@ class ClockRightPart extends StatefulWidget {
 }
 
 class _ClockRightPartState extends State<ClockRightPart> {
+  late Timer _timer;
 
   @override
   void initState() {
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {});
-    });
     super.initState();
+
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
