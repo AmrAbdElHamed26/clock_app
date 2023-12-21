@@ -10,6 +10,7 @@ import '../controller/clock_bloc.dart';
 class ClockView extends StatelessWidget {
   const ClockView({Key? key}) : super(key: key);
 
+  /// todo : change ui in landscape view
   @override
   Widget build(BuildContext context) {
     return Row(
