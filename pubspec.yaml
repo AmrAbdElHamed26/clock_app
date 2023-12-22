@@ -28,8 +28,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  flutter:
-    sdk: flutter
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -44,6 +42,10 @@ dependencies:
   flutter_staggered_animations: ^1.1.1
   sqflite: ^2.3.0
   dotted_border: ^2.1.0
+  syncfusion_flutter_datepicker: ^24.1.41
+  circular_motion: ^0.0.4
+  time_duration_picker: ^0.0.1
+  time_picker_spinner: ^0.0.1
 
 dev_dependencies:
   flutter_test:

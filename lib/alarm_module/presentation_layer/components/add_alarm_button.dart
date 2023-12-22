@@ -1,13 +1,24 @@
 import 'package:clock_app/alarm_module/data_layer/models/alarm_data_model.dart';
+import 'package:clock_app/alarm_module/presentation_layer/components/add_alarm_screen.dart';
+import 'package:clock_app/alarm_module/presentation_layer/controller/alarm_bloc.dart';
 import 'package:clock_app/shared/services/alarm_local_data_base.dart';
+import 'package:clock_app/shared/services/services_locator.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../shared/utils/custom_colors.dart';
 
-class AddAlarmButton extends StatelessWidget {
-  const AddAlarmButton({Key? key}) : super(key: key);
+class AddAlarmButton extends StatefulWidget {
+  AddAlarmButton({Key? key}) : super(key: key);
+
+  @override
+  State<AddAlarmButton> createState() => _AddAlarmButtonState();
+}
+
+class _AddAlarmButtonState extends State<AddAlarmButton> {
+  bool showAddAlarmButton = true ;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +42,20 @@ class AddAlarmButton extends StatelessWidget {
         /// todo : send event (add new alarm) to show form to add new alarm
 
 
+        /*BlocProvider.of<AlarmBloc>(context).add(const AddNewAlarmEvent(currentState: true));
+        showAddAlarmButton = false;
+        setState(() {
+
+        });*/
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const AddAlarmFormData()),
+        );
+        /// todo : need to make local notifications when add any alarm
+
       },
-      child: DottedBorder(
+      child: showAddAlarmButton == true ? DottedBorder(
         strokeWidth: 2,
         color: CustomColors.clockOutline,
         borderType: BorderType.RRect,
@@ -59,7 +82,7 @@ class AddAlarmButton extends StatelessWidget {
             ),
           ),
         ),
-      ),
+      ):Container(),
     );
   }
 }

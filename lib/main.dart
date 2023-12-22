@@ -1,10 +1,11 @@
 import 'package:clock_app/shared/services/bloc_observer.dart';
 import 'package:clock_app/shared/services/services_locator.dart';
+import 'package:clock_app/shared/utils/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'clock_module/presentation_layer/controller/clock_bloc.dart';
 import 'clock_module/presentation_layer/screens/clock_screen.dart';
-
+import 'package:clock_app/shared/utils/themes.dart';
 
 void main() {
   ServiceLocator().init();
@@ -18,10 +19,10 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: MyHomePage(),
+      theme: darkTheme,
+      home: const MyHomePage(),
     );
   }
 }

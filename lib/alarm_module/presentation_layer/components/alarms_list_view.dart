@@ -32,7 +32,7 @@ class AlarmsListView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   AlarmComponent(screenHeight: screenHeight, screenWidth: screenWidth, alarmData: alarmData),
-                  const AddAlarmButton(),
+                  AddAlarmButton(),
                 ],
               ),
             );

@@ -13,7 +13,7 @@ part 'alarm_state.dart';
 
 class AlarmBloc extends Bloc<AlarmEvent, AlarmState> {
   final GetAlarmsDataUseCase getAlarmsDataUseCase ;
-  AlarmBloc(this.getAlarmsDataUseCase) : super(const AlarmState()) {
+  AlarmBloc(this.getAlarmsDataUseCase) : super(const AlarmState(addNewAlarm: false)) {
     on<GetAllAlarmsEvent>((event, emit) async{
 
       final result = await getAlarmsDataUseCase.execute() ;
@@ -24,6 +24,12 @@ class AlarmBloc extends Bloc<AlarmEvent, AlarmState> {
         getAllAlarmsState: RequestState.loaded ,
       ));
 
+    });
+
+    on<AddNewAlarmEvent>((event, emit) async{
+      emit(state.copyWith(
+        addNewAlarm: true ,
+      ));
     });
   }
 }

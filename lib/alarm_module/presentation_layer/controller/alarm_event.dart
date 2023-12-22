@@ -11,4 +11,13 @@ class GetAllAlarmsEvent extends AlarmEvent {
 
 }
 
+class AddNewAlarmEvent extends AlarmEvent {
+  final bool currentState ;
+
+  const AddNewAlarmEvent({required this.currentState});
+  @override
+  List<Object?> get props => [currentState];
+
+}
+
 
