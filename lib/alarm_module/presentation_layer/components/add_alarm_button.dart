@@ -32,27 +32,16 @@ class _AddAlarmButtonState extends State<AddAlarmButton> {
         .height;
     return MaterialButton(
       onPressed: () {
-/*
-        /// todo : add data from add alarm button
-        AlarmHelper().insertAlarm(const AlarmDataModel(
-          alarmName: 'sport', alarmAvailable: 'true',
-          description: 'time for gym', alarmDateTime: '6:00',
-
-        ));*/
-        /// todo : send event (add new alarm) to show form to add new alarm
 
 
-        /*BlocProvider.of<AlarmBloc>(context).add(const AddNewAlarmEvent(currentState: true));
-        showAddAlarmButton = false;
-        setState(() {
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) => AddAlarmFormData(),
+        )).then((result) {
+          setState(() {
 
-        });*/
-
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const AddAlarmFormData()),
-        );
-        /// todo : need to make local notifications when add any alarm
+            BlocProvider.of<AlarmBloc>(context).add(GetAllAlarmsEvent());
+          });
+        });
 
       },
       child: showAddAlarmButton == true ? DottedBorder(

@@ -2,19 +2,22 @@ import 'package:clock_app/alarm_module/domain_layer/entities/alarm.dart';
 import 'package:clock_app/shared/utils/constances.dart';
 
 class AlarmDataModel extends AlarmDetails {
-  const AlarmDataModel({
+  const AlarmDataModel( {
+    required super.alarmID,
     required super.alarmName,
     required super.alarmAvailable,
-    required super.description,
-    required super.alarmDateTime,
+    required super.description, required super.alarmDate, required super.alarmTime, required super.colorIndex
+
   });
 
   Map<String, dynamic> toMap() {
     return {
       Constances.kColumnTitle: alarmName,
-      Constances.kColumnDateTime: alarmDateTime,
+      Constances.kColumnDate: alarmDate,
+      Constances.kColumnTime: alarmTime,
       Constances.kColumnPending: alarmAvailable,
       Constances.kColumnDescription: description,
+      Constances.kColumnColorIndex:colorIndex,
     };
   }
 
@@ -23,7 +26,10 @@ class AlarmDataModel extends AlarmDetails {
       alarmName: map[Constances.kColumnTitle],
       alarmAvailable: map[Constances.kColumnPending],
       description: map[Constances.kColumnDescription],
-      alarmDateTime: map[Constances.kColumnDateTime],
+      alarmDate: map[Constances.kColumnDate],
+      alarmTime: map[Constances.kColumnTime],
+      alarmID : map[Constances.kColumnId], colorIndex: map[Constances.kColumnColorIndex],
+
     );
   }
 }

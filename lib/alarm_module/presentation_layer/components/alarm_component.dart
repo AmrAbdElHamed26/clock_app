@@ -5,10 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../../shared/utils/custom_colors.dart';
-import 'add_alarm_screen.dart';
 
 class AlarmComponent extends StatelessWidget {
-  const AlarmComponent({
+  AlarmComponent({
     super.key,
     required this.screenHeight,
     required this.screenWidth,
@@ -18,6 +17,7 @@ class AlarmComponent extends StatelessWidget {
   final double screenHeight;
   final double screenWidth;
   final List<AlarmDetails> alarmData;
+
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +35,8 @@ class AlarmComponent extends StatelessWidget {
   }
 }
 
-class AlarmsListView extends StatelessWidget {
-  const AlarmsListView({
+class AlarmsListView extends StatefulWidget {
+  AlarmsListView({
     super.key,
     required this.screenHeight,
     required this.screenWidth,
@@ -46,6 +46,14 @@ class AlarmsListView extends StatelessWidget {
   final double screenHeight;
   final double screenWidth;
   final List<AlarmDetails> alarmData;
+
+  @override
+  State<AlarmsListView> createState() => _AlarmsListViewState();
+}
+
+class _AlarmsListViewState extends State<AlarmsListView> {
+  bool switchState = true;
+  bool _showDeatils = false;
 
   @override
   Widget build(BuildContext context) {
@@ -59,17 +67,17 @@ class AlarmsListView extends StatelessWidget {
               child: FadeInAnimation(
                 child: Padding(
                   padding:
-                      EdgeInsets.symmetric(vertical: screenHeight * .000001),
+                      EdgeInsets.symmetric(vertical: widget.screenHeight * .000001),
                   child: Container(
                     margin: EdgeInsets.only(
-                        bottom: screenHeight * .05, right: screenWidth * .01),
+                        bottom: widget.screenHeight * .05, right: widget.screenWidth * .01),
                     padding: EdgeInsets.symmetric(
-                        horizontal: screenWidth * 0.04,
-                        vertical: screenHeight * 0.02),
+                        horizontal: widget.screenWidth * 0.04,
+                        vertical: widget.screenHeight * 0.02),
                     width: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: switchState == true ? BoxDecoration(
                       gradient: LinearGradient(
-                        colors: GradientColors.fire,
+                        colors: GradientColors.allColors[int.parse(widget.alarmData[index].colorIndex)],
                         begin: Alignment.centerLeft,
                         end: Alignment.centerRight,
                       ),
@@ -82,7 +90,15 @@ class AlarmsListView extends StatelessWidget {
                         ),
                       ],
                       borderRadius: const BorderRadius.all(Radius.circular(24)),
-                    ),
+                    ) : BoxDecoration(color: Colors.grey , boxShadow: [
+                      BoxShadow(
+                        color: GradientColors.sea.last.withOpacity(0.2),
+                        blurRadius: 5,
+                        spreadRadius: 3,
+                        offset: const Offset(1, 1),
+                      ),
+                    ],
+                      borderRadius: const BorderRadius.all(Radius.circular(24)),),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -94,59 +110,87 @@ class AlarmsListView extends StatelessWidget {
                                 Icon(
                                   Icons.article_outlined,
                                   color: Colors.white,
-                                  size: screenWidth * 0.06,
+                                  size: widget.screenWidth * 0.06,
                                 ),
                                 SizedBox(
-                                  width: screenHeight * 0.01,
+                                  width: widget.screenHeight * 0.01,
                                 ),
                                 Text(
-                                  alarmData[index].alarmName,
+                                  widget.alarmData[index].alarmName,
                                   style: TextStyle(
                                       color: Colors.white,
-                                      fontSize: screenWidth * 0.05),
+                                      fontSize: widget.screenWidth * 0.05),
                                 ),
                               ],
                             ),
                             Switch(
-                              value: true,
-                              onChanged: (bool value) {},
+                              value:switchState ,
+                              onChanged: (bool value) {
+                                switchState = value ;
+
+                                /// todo : need to update the state in data base
+                                /// todo : swap left or right to remove the alarm
+                                setState(() {
+
+                                });
+                              },
                               activeColor: Colors.white,
                             ),
                           ],
                         ),
                         SizedBox(
-                          height: screenHeight * 0.00001,
+                          height: widget.screenHeight * 0.00001,
                         ),
                         Text(
-                          alarmData[index].alarmDateTime,
+                          widget.alarmData[index].alarmDate,
                           style: TextStyle(
                               color: Colors.white,
-                              fontSize: screenWidth * 0.05,
+                              fontSize: widget.screenWidth * 0.05,
                               fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
-                          height: screenHeight * 0.002,
+                          height: widget.screenHeight * 0.002,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              alarmData[index].alarmDateTime,
+                              widget.alarmData[index].alarmTime,
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: screenWidth * 0.08,
+                                  fontSize: widget.screenWidth * 0.08,
                                   fontWeight: FontWeight.bold),
                             ),
                             IconButton(
-                              onPressed: () {},
+                              onPressed: () {
+
+                                if(switchState == true){
+                                  _showDeatils = !_showDeatils;
+                                  setState(() {
+
+                                  });
+                                }
+                              },
                               icon: Icon(
                                 Icons.expand_circle_down,
                                 color: Colors.white,
-                                size: screenWidth * 0.06,
+                                size: widget.screenWidth * 0.06,
                               ),
                             ),
+
                           ],
                         ),
+                        if(_showDeatils == true) Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text("Description" ,style: TextStyle(fontSize: 16 , color: Colors.white ,fontWeight: FontWeight.bold) ),
+                              Text(widget.alarmData[index].description , style: const TextStyle(fontSize: 14 , color: Colors.white ),maxLines: 10,),
+                            ],
+                          ),
+                        )
+
                       ],
                     ),
                   ),
@@ -155,12 +199,10 @@ class AlarmsListView extends StatelessWidget {
             ),
           );
         },
-        itemCount: alarmData.length,
+        itemCount: widget.alarmData.length,
       ),
     );
   }
 }
 
 
-/// 1- show a small form data
-/// 2- navigate to another screen

@@ -46,6 +46,8 @@ dependencies:
   circular_motion: ^0.0.4
   time_duration_picker: ^0.0.1
   time_picker_spinner: ^0.0.1
+  audioplayers: ^5.2.1
+  just_toast: ^0.0.3
 
 dev_dependencies:
   flutter_test:

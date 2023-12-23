@@ -5,8 +5,7 @@ import 'package:clock_app/alarm_module/presentation_layer/controller/alarm_bloc.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../../shared/utils/custom_colors.dart';
+
 import '../../../shared/utils/enums.dart';
 class AlarmsListView extends StatelessWidget {
   const AlarmsListView({Key? key}) : super(key: key);

@@ -10,7 +10,9 @@ class Constances {
   static const String kTableAlarm = 'alarm';
   static const String kColumnId = 'id';
   static const String kColumnTitle = 'title';
-  static const String kColumnDateTime = 'alarmDateTime';
+  static const String kColumnDate = 'alarmDate';
+  static const String kColumnTime = 'alarmTime';
+
   static const String kColumnPending = 'isPending';
   static const String kColumnColorIndex = 'gradientColorIndex';
   static const String kColumnDescription = 'description';
