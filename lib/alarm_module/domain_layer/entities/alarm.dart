@@ -5,6 +5,7 @@ class AlarmDetails extends Equatable {
   final String alarmAvailable;
   final String description , colorIndex;
   final int alarmID ;
+  final String alarmState ;
 
   const AlarmDetails( {
     required this.alarmID,
@@ -14,6 +15,7 @@ class AlarmDetails extends Equatable {
     required this.alarmAvailable,
     required this.description,
     required this.colorIndex,
+    required this.alarmState ,
   });
 
   @override
@@ -23,6 +25,7 @@ class AlarmDetails extends Equatable {
         alarmTime,
         alarmName,
         description,
-    colorIndex
+    colorIndex,
+    alarmState
       ];
 }

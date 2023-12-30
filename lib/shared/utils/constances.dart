@@ -16,6 +16,7 @@ class Constances {
   static const String kColumnPending = 'isPending';
   static const String kColumnColorIndex = 'gradientColorIndex';
   static const String kColumnDescription = 'description';
+  static const String kColumnAlarmState = "alarmState";
 
   static const Color primaryAppColor = Color(0xFF2D2F41);
 }

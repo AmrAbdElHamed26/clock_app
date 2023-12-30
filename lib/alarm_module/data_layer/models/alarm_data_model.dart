@@ -6,7 +6,7 @@ class AlarmDataModel extends AlarmDetails {
     required super.alarmID,
     required super.alarmName,
     required super.alarmAvailable,
-    required super.description, required super.alarmDate, required super.alarmTime, required super.colorIndex
+    required super.description, required super.alarmDate, required super.alarmTime, required super.colorIndex, required super.alarmState
 
   });
 
@@ -18,6 +18,7 @@ class AlarmDataModel extends AlarmDetails {
       Constances.kColumnPending: alarmAvailable,
       Constances.kColumnDescription: description,
       Constances.kColumnColorIndex:colorIndex,
+      Constances.kColumnAlarmState:alarmState,
     };
   }
 
@@ -28,7 +29,7 @@ class AlarmDataModel extends AlarmDetails {
       description: map[Constances.kColumnDescription],
       alarmDate: map[Constances.kColumnDate],
       alarmTime: map[Constances.kColumnTime],
-      alarmID : map[Constances.kColumnId], colorIndex: map[Constances.kColumnColorIndex],
+      alarmID : map[Constances.kColumnId], colorIndex: map[Constances.kColumnColorIndex], alarmState: map[Constances.kColumnAlarmState],
 
     );
   }

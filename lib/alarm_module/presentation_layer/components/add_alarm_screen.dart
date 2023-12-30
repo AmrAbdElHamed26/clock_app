@@ -252,6 +252,7 @@ class _AddAlarmFormDataState extends State<AddAlarmFormData> {
                                         description: alarmDescription,
                                         alarmDate: selectedDate.toString(),
                                         alarmTime: selectedTime.toString(),
+                                        alarmState: 'true',
                                         colorIndex: '0'));
 
                                     showToast(
@@ -283,6 +284,8 @@ class _AddAlarmFormDataState extends State<AddAlarmFormData> {
                               borderRadius: BorderRadius.circular(12),
                               color: Constances.primaryAppColor),
                           child: SfDateRangePicker(
+                            initialDisplayDate: DateTime.now(),
+                            initialSelectedDate: DateTime.now(),
                             enablePastDates: false,
                             selectionMode: DateRangePickerSelectionMode.single,
                             confirmText: 'Ok',

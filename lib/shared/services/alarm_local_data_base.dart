@@ -36,7 +36,8 @@ class AlarmHelper {
           ${Constances.kColumnTime} text not null,
           ${Constances.kColumnPending} text not null,
           ${Constances.kColumnColorIndex} text not null,
-           ${Constances.kColumnDescription} text not null )
+           ${Constances.kColumnDescription} text not null,
+           ${Constances.kColumnAlarmState} text not null )
         ''');
       },
     );
@@ -51,16 +52,21 @@ class AlarmHelper {
 
     var result = await db.insert(Constances.kTableAlarm, alarmDataModel.toMap());
 
-    await db.update(
-      Constances.kTableAlarm,
-      {Constances.kColumnColorIndex: ((result)%GradientColors.allColors.length).toString()},
-      where: '${Constances.kColumnId} = ?',
-      whereArgs: [result],
-    );
+    await updateAlarm(result, Constances.kColumnColorIndex, ((result) % GradientColors.allColors.length).toString());
 
     return result;
   }
 
+  Future<void> updateAlarm(int alarmId, String updatedColumn, String newValue) async {
+    var db = await database;
+
+    await db.update(
+      Constances.kTableAlarm,
+      {updatedColumn: newValue},
+      where: '${Constances.kColumnId} = ?',
+      whereArgs: [alarmId],
+    );
+  }
 
   Future<List<AlarmDataModel>> getAlarms() async {
     List<AlarmDataModel> alarms = [];
